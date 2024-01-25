@@ -1,0 +1,7 @@
+lines: #104b67
+bg: #acd9ea
+bgShadow: #6db1c6
+pages: #ffffff
+middle: #fff1e3
+dark: #ffd7b6
+darkes: #FFB883
