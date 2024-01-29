@@ -2,7 +2,7 @@
   "name": "book-self",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://localhost/#/home",
+  "homepage": "http://localhost:3000/#/home",
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
