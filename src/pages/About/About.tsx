@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeLayout } from '../../layouts/HomeLayout';
+import { MainLayout } from '../../layouts/MainLayout';
 
 const stats = [
   { label: 'Transactions every 24 hours', value: '44 million' },
@@ -141,7 +141,7 @@ const blogPosts = [
 
 export const About: React.FC = () => {
   return (
-    <HomeLayout>
+    <MainLayout>
       <div className="bg-white">
         <main className="isolate">
           {/* Hero section */}
@@ -451,6 +451,6 @@ export const About: React.FC = () => {
         </main>
       </div>
 
-    </HomeLayout>
+    </MainLayout>
   );
 };

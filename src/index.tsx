@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AppContextProvider } from './context/AppContext';
+import { CalendarContextProvider } from './context/CalendarContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <AppContextProvider>
+      <CalendarContextProvider>
+        <App />
+      </CalendarContextProvider>
+    </AppContextProvider>
   </React.StrictMode>
 );
 

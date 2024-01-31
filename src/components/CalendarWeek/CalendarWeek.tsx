@@ -2,8 +2,13 @@ import React, { Fragment, useEffect, useRef } from 'react';
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/20/solid';
 import { Menu, Transition } from '@headlessui/react';
 import cn from 'classnames';
+import { CalendarEnum } from '../../utils/enum/CalendarEnum';
 
-export const CalendarWeek: React.FC = () => {
+type CalendarWeekProp = {
+  setChosenCalendar: (input: CalendarEnum) => void;
+}
+
+export const CalendarWeek: React.FC<CalendarWeekProp> = ({setChosenCalendar}) => {
   const container = useRef(null);
   const containerNav = useRef(null);
   const containerOffset = useRef(null);
@@ -50,7 +55,7 @@ export const CalendarWeek: React.FC = () => {
             </button>
           </div>
           <div className="hidden md:ml-4 md:flex md:items-center">
-            <Menu as="div" className="relative">
+          <Menu as="div" className="relative">
               <Menu.Button
                 type="button"
                 className="flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -72,55 +77,76 @@ export const CalendarWeek: React.FC = () => {
                   <div className="py-1">
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
+                        <button
+                          onClick={() => {
+                            setChosenCalendar(CalendarEnum.MINI);
+                          }}
                           className={cn(
                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm',
+                            'block px-4 py-2 text-sm w-36',
                           )}
                         >
-                          Day view
-                        </a>
+                          Mini view
+                        </button>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
-                          className={cn(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm',
-                          )}
-                        >
-                          Week view
-                        </a>
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.DAY);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Day view
+                      </button>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
-                          className={cn(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm',
-                          )}
-                        >
-                          Month view
-                        </a>
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.WEEK);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Week view
+                      </button>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
-                          href="#"
-                          className={cn(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm',
-                          )}
-                        >
-                          Year view
-                        </a>
-                      )}
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.MONTH);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Month view
+                      </button>                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.YEAR);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Year view
+                      </button>                      )}
                     </Menu.Item>
                   </div>
                 </Menu.Items>
@@ -149,92 +175,83 @@ export const CalendarWeek: React.FC = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-3 w-36 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
+                <Menu.Items className="absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="py-1">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => {
+                            setChosenCalendar(CalendarEnum.MINI);
+                          }}
+                          className={cn(
+                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                            'block px-4 py-2 text-sm w-36',
+                          )}
+                        >
+                          Mini view
+                        </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.DAY);
+                        }}
                         className={cn(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        )}
-                      >
-                        Create event
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={cn(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
-                        )}
-                      >
-                        Go to today
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className="py-1">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={cn(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
+                          'block px-4 py-2 text-sm w-36',
                         )}
                       >
                         Day view
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
+                      </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.WEEK);
+                        }}
                         className={cn(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
+                          'block px-4 py-2 text-sm w-36',
                         )}
                       >
                         Week view
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
+                      </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.MONTH);
+                        }}
                         className={cn(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
+                          'block px-4 py-2 text-sm w-36',
                         )}
                       >
                         Month view
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
+                      </button>                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.YEAR);
+                        }}
                         className={cn(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm',
+                          'block px-4 py-2 text-sm w-36',
                         )}
                       >
                         Year view
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-              </Menu.Items>
+                      </button>                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
             </Transition>
           </Menu>
         </div>

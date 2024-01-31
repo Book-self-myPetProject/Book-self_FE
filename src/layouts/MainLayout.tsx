@@ -2,11 +2,11 @@ import React, { ReactNode } from 'react';
 import { Header } from '../components/Header/Header';
 import { Footer } from '../components/Footer/Footer';
 
-interface HomeLayoutProps {
+interface MainLayoutProps {
   children: ReactNode;
 }
 
-export const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
+export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div>
       <Header />

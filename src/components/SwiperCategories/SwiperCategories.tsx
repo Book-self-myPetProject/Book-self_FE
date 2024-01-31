@@ -4,7 +4,6 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import { A11y, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 
 type SwipeCategoriesProps = {
-  items: string[];
   title: string;
 };
 
@@ -14,8 +13,14 @@ enum WhichView {
   desktop = 4,
 }
 
-export const SwipeCategories: React.FC<SwipeCategoriesProps> = ({ items, title }) => {
-  const slides = [...items];
+const categoriesForSwiper = [
+  { name: 'hairdresser', href: 'http://localhost:3000/#/categories/hairdresser', icon: '../../assets/imgs/logo/colorfullNoFont/book-self_logo.svg' },
+  { name: 'barber', href: 'http://localhost:3000/#/categories/barber', icon: '../../assets/imgs/logo/partialcolorNoFont/book-self_logo.svg' },
+  { name: 'other', href: 'http://localhost:3000/#/categories/other', icon: '../../assets/imgs/logo/linesNoFont/book-self_logo.svg' },
+];
+
+export const SwipeCategories: React.FC<SwipeCategoriesProps> = ({ title }) => {
+  const slides = [...categoriesForSwiper];
   const [whichView, setWhichView] = useState<WhichView>(1.5);
   const [swiper, setSwiper] = useState<SwiperClass | null>(null);
 
@@ -53,7 +58,7 @@ export const SwipeCategories: React.FC<SwipeCategoriesProps> = ({ items, title }
 
   return (
     <>
-      <div>Swiper</div>
+      <div>{title}</div>
       <Swiper
         spaceBetween={16}
         slidesPerView={whichView}
@@ -66,7 +71,10 @@ export const SwipeCategories: React.FC<SwipeCategoriesProps> = ({ items, title }
         {slides.map((slide, index) => {
           return (
             <SwiperSlide key={index}>
-              {/* something */}
+              <a href={slide.href}>
+                <img className="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src={slide.icon} alt={slide.name} />
+                <h3 className="mt-6 text-sm font-medium text-gray-900">{slide.name}</h3>
+              </a>
             </SwiperSlide>
           );
         })}

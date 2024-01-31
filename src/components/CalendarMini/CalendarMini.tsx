@@ -2,6 +2,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import {
   CalendarIcon,
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   EllipsisHorizontalIcon,
@@ -9,6 +10,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { Menu, Transition } from '@headlessui/react';
 import cn from 'classnames';
+import { CalendarEnum } from '../../utils/enum/CalendarEnum';
 
 const meetings = [
   {
@@ -68,10 +70,114 @@ const days = [
   { date: '2022-02-06' },
 ];
 
-export const CalendarMini: React.FC = () => {
+type CalendarMiniProp = {
+  setChosenCalendar: (input: CalendarEnum) => void;
+}
+
+export const CalendarMini: React.FC<CalendarMiniProp> = ({setChosenCalendar}) => {
   return (
     <div>
+      <div className="hidden md:ml-4 md:flex md:items-center md:justify-around">
       <h2 className="text-base font-semibold leading-6 text-gray-900">Upcoming meetings</h2>
+        <Menu as="div" className="relative">
+              <Menu.Button
+                type="button"
+                className="flex items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                Mini view
+                <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+              </Menu.Button>
+
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="py-1">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => {
+                            setChosenCalendar(CalendarEnum.MINI);
+                          }}
+                          className={cn(
+                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                            'block px-4 py-2 text-sm w-36',
+                          )}
+                        >
+                          Mini view
+                        </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.DAY);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Day view
+                      </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.WEEK);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Week view
+                      </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.MONTH);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Month view
+                      </button>                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                        onClick={() => {
+                          setChosenCalendar(CalendarEnum.YEAR);
+                        }}
+                        className={cn(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-36',
+                        )}
+                      >
+                        Year view
+                      </button>                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+        </Menu>
+      </div>
+      
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
           <div className="flex items-center text-gray-900">

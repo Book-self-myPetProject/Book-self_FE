@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import logo from '../../logo.svg';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { MainLayout } from '../../layouts/MainLayout';
 import { Dialog } from '@headlessui/react';
 import { SwipeCategories } from '../../components/SwiperCategories/SwiperCategories';
+import { MainLoggedLayout } from '../../layouts/MainLoggedLayout';
 
-export const Home: React.FC = () => {
+export const MyProfile: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
-       <MainLayout>
+       <MainLoggedLayout>
        
     <div className="App">
     <header className="App-header">
@@ -35,7 +35,7 @@ export const Home: React.FC = () => {
       </a>
     </header>
     </div>
-      </MainLayout>
+      </MainLoggedLayout>
 
     </>
   );
